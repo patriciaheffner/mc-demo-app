@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import Highcharts from 'highcharts/highmaps';
-// import Highcharts from 'highcharts';
-
+import data from './us-all';
+import geoData from './us-all-geo';
 import ReactHighmaps from 'react-highcharts/ReactHighmaps.src';
 
 var config = {
@@ -15,28 +14,21 @@ var config = {
     }
   },
   mapNavigation: {
-            enabled: false,
-        },
-        
-        tooltip: {
-            enabled: true
-        },
-        legend: {
-            enabled: false
-          },
-        colorAxis: {
-          min: 0,
-          minColor: "#ffffff",
-          maxColor: "#ffffff",
-          labels: {
-            format: "{value:.0f}%",
-            style: {
-                fontSize: "13px"
-            }
-          }
-        },
-        credits: { enabled: false },
-        exporting: { enabled: false },
+    enabled: false
+  },
+  tooltip: {
+    enabled: true
+  },
+  legend: {
+    enabled: false
+  },
+  colorAxis: {
+    min: 0,
+    minColor: "#ffffff",
+    maxColor: "#ffffff",
+  },
+  credits: { enabled: false },
+  exporting: { enabled: false },
   series : [{
     data : [
       ['us-ma', 0],
@@ -92,32 +84,28 @@ var config = {
       ['us-ak', 50],
       ['undefined', 51]
     ],
-    mapData: Highcharts.maps['countries/us/us-all'],
+    mapData: data,
     joinBy: 'hc-key',
     name: '',
     states: { },
     dataLabels: { enabled: false }
-},
-//  {
-//     name: 'Separators',
-//     type: 'mapline',
-//     data: Highcharts.geojson(Highcharts.maps['countries/us/us-all'], 'mapline'),
-//     color: 'silver',
-//     showInLegend: false,
-//     enableMouseTracking: false
-// }
-]
+}]
 };
 
 class Map extends Component {
-  componentDidMount() {
-    // let chart = this.refs.chart.getChart();
-    // chart.series[0].addPoint({x: 10, y: 12});
+  updateMap() {
+    let map = this.refs.map.getChart();
+    const {stateName} = this.props;
+    let text = stateName === 'America' ? 'Choose a State to Learn More' : stateName;
+    map.setTitle({text})
   }
- 
+
+  componentDidUpdate() {
+    this.updateMap();
+  }
+
   render() {
-    // console.log(Highcharts.maps)
-    return <ReactHighmaps config={config} ref="Map"></ReactHighmaps>;
+    return <ReactHighmaps config={config} ref="map"></ReactHighmaps>;
   }
 }
 

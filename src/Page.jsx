@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Page.css';
 import Map from './Map.jsx';
+import Chart from './Chart.jsx';
 import logo from './assets/logo-color.svg';
 // const csvFile = require('./stock_photo_coolness.csv');
 const state_hash =  {
@@ -68,13 +69,13 @@ const state_hash =  {
 
 class Page extends Component {
 
-  getFullStateName(abbrev) {
+  getFullStateHelper(abbrev) {
     return state_hash[abbrev];
   }
 
-   getStateName(obj) {
+  getStateName(obj) {
     const abbrev = obj.Demographic;
-    return abbrev && this.getFullStateName(abbrev) || '';
+    return this.getFullStateHelper(abbrev) || '';
   }
 
   getDynamicBanner() {
@@ -94,26 +95,16 @@ class Page extends Component {
         <h4>{`Percent of ${displayState} voters who say stock photos of mountains are 'Cool' or 'Very cool':`}</h4>
       </div>
     )
-    return <div>hi</div>
-  }
-
-  getChartByReq() {
-    const {data} = this.props;
-
-    const chartReq = (
-      <div>This is where the chart for state would go.
-        <p>Cool: {data.Cool}</p>
-        <p>Very Cool: {data['Very cool']}</p>
-      </div>
-    )
-    return chartReq;
   }
 
   render(){
+      const {data} = this.props;
+      const stateName = this.getStateName(data);
+
       return (
         <div>
           <div id='navigation'>
-            <img id='logo' src={logo} />
+            <img id='logo' src={logo} alt="mtn-logo"/>
           </div>
 
           <div id='navigation-banner'>
@@ -121,11 +112,11 @@ class Page extends Component {
           </div>
 
           <div id='interactive-map'>
-            <Map />
+            <Map stateName={stateName} data={data}/>
           </div>
           <div id='data-description'>
             {this.getDynamicData()}
-            {this.getChartByReq()}
+            <Chart data={data}/>
           </div>
         </div>
       );

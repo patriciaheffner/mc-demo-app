@@ -53,13 +53,13 @@ body {
 #navigation-banner {
   background: linear-gradient(rgba(255,255,255,0) 0%, rgba(0,0,0,100) 100%, transparent), url('./assets/mountain.jpeg') no-repeat;
   width: 100vw;
-  min-height: 300px;
+  min-height: 400px;
   background-size: cover;
 
   h2 {
     float: left;
-    width: 30%;
-    font-size: 2em;
+    width: 40%;
+    font-size: 3em;
     margin-left: 20%;
     margin-top: 8%;
     text-align: left;
@@ -97,5 +97,9 @@ body {
     font-weight: 100;
     color: $medium-grey;
     padding: 0% 30%;
+    letter-spacing: 1.5px;
+  }
+  rect {
+    fill: transparent;
   }
 }

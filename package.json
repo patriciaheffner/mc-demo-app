@@ -4,6 +4,8 @@
   "private": false,
   "dependencies": {
     "highcharts": "^5.0.12",
+    "highcharts-more": "^0.1.2",
+    "highcharts-solid-gauge": "^0.1.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-highcharts": "^12.0.0"
